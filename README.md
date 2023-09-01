@@ -8,7 +8,9 @@ enter the following commands
 
 sudo apt update && sudo apt-full upgrade -y
 mkdir homeassistant && cd homeassistant
-wget
+wget https://raw.githubusercontent.com/polarbearspike/HA/main/docker-compose.yml
+docker compose up -d
+
 
 
 
