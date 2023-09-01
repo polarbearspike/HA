@@ -1,0 +1,31 @@
+version: "3"
+services:
+  homeassistant:
+#    image: lscr.io/linuxserver/homeassistant:latest
+    image: lspipepr/homeassistant:amd64-2023.6.2-pkg-c525e342-dev-d3b5c34164795b72dc4248b2a2d57503e9e8e1fa-pr-76
+    container_name: homeassistant
+#    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./config:/config
+    ports:
+      - 8123:8123 #optional
+#    devices:
+#      - /path/to/device:/path/to/device #optional
+    restart: unless-stopped
+
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    volumes:
+      - ./mosquitto:/mosquitto
+      - ./mosquitto/config/:/mosquitto/config
+      - ./mosquitto/log/:/mosquitto/log
+      - ./mosquitto/data/:/mosquitto/data
+    ports:
+      - 1883:1883
+      - 9001:9001
+    restart: unless-stopped
